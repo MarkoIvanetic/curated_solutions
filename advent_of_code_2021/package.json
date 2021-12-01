@@ -5,11 +5,15 @@
   "type": "module",
   "main": "day_1.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "day1": "node day_1",
+    "test": "node --experimental-vm-modules node_modules/.bin/jest"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "node-fetch": "^3.1.0"
+  },
+  "devDependencies": {
+    "jest": "^27.4.3"
   }
 }
