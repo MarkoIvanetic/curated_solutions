@@ -1,4 +1,4 @@
-import { calculate_a, calculate_b } from '../day_1'
+import { calculate_a, calculate_b } from '../src/day_1'
 
 describe('[Day 1 - task 1] proposed solution should', () => {
 	//   beforeEach(() => {

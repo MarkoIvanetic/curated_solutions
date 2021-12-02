@@ -5,7 +5,8 @@
   "type": "module",
   "main": "day_1.js",
   "scripts": {
-    "day1": "node day_1",
+    "day1": "node src/day_1",
+    "day2": "node src/day_2",
     "test": "node --experimental-vm-modules node_modules/.bin/jest"
   },
   "author": "",

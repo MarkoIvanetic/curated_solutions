@@ -1,17 +1,5 @@
 // https://adventofcode.com/2021/day/1
-import fetch from 'node-fetch'
-
-function transformData(data) {
-	return data.split(new RegExp('\r\n|\r|\n', 'g')).map((s) => parseInt(s))
-}
-
-async function fetchData() {
-	const data = await fetch('https://pastebin.com/raw/SKBN9zMg')
-		.then((response) => response.text())
-		.then((response) => transformData(response))
-
-	return data
-}
+import {  fetchPastebinData } from "../utils/index.js"
 
 export function calculate_a(data) {
 	const result = data.reduce((acc, iter, i) => {
@@ -46,7 +34,8 @@ export function calculate_b(data) {
 	return result
 }
 
-const data = await fetchData()
+const rawData = await fetchPastebinData('https://pastebin.com/raw/SKBN9zMg')
+const data = rawData.split(new RegExp('\r\n|\r|\n', 'g')).map((s) => parseInt(s))
 const a = calculate_a(data)
 const b = calculate_b(data)
 
