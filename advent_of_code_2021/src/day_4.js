@@ -1,5 +1,6 @@
 // https://adventofcode.com/2021/day/4
 import {  fetchPastebinDataJSON } from "../utils/index.js"
+import _ from 'lodash'
 
 const BINGO = "XXXXX"
 
@@ -13,8 +14,7 @@ function checkCrossHitsOnLocation(card, i) {
 
     const isRowBing = changedRowIndexes.map(i => card[i]).join("") === BINGO
 
-    const changedColIndexes = [firstRowNum, firstRowNum + 5, firstRowNum + 10, firstRowNum + 15, firstRowNum + 20]
-
+    const changedColIndexes = [firstColNum, firstColNum + 5, firstColNum + 10, firstColNum + 15, firstColNum + 20]
     const isColBing = changedColIndexes.map(i => card[i]).join("") === BINGO
 
     if (!isRowBing && !isColBing) {
@@ -39,8 +39,9 @@ export function calculate_a(data) {
     // multiply them by number N
     let solution
 
-    data.numbers.every((N, i) => {
+    data.numbers.every((Ns, i) => {
         // something
+        const N = parseInt(Ns)
         let sumOfUnusedCardNumbers
 
         data.cards.every((C, j) => {
@@ -54,13 +55,13 @@ export function calculate_a(data) {
                 }
                 return true
             }
+            return true
         })
 
         if (sumOfUnusedCardNumbers) {
             solution = N * sumOfUnusedCardNumbers
             return false
         }
-        // console.log(data.cards);
         return true
     })
 
