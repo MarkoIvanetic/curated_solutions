@@ -8,6 +8,7 @@
     "day1": "node src/day_1",
     "day2": "node src/day_2",
     "day3": "node src/day_3",
+    "day4": "node src/day_4",
     "test": "node --experimental-vm-modules node_modules/.bin/jest"
   },
   "author": "",
