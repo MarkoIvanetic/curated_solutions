@@ -16,9 +16,9 @@ describe('[Day 4 - task 1] proposed solution should', () => {
 	})
 })
 
-// describe('[Day 3 - task 2] proposed solution should', () => {
-// 	test('handle simple example of random numbers', () => {
-// 		const result = calculate_b(inputData)
-// 		expect(result).toBe(230)
-// 	})
-// })
+describe('[Day 4 - task 2] proposed solution should', () => {
+	test('handle simple example of random numbers', () => {
+		const result = calculate_b(inputData)
+		expect(result).toBe(1924)
+	})
+})

@@ -69,30 +69,45 @@ export function calculate_a(data) {
 }
 
 export function calculate_b(data) {
-	const result = data.reduce((acc, iter, i) => {
-		// lets check the limits of array
-		if (!(data[i + 1] && data[i + 2] && data[i - 1])) {
-			return acc
-		}
+    // iterate numbers (N)
+    // iterate cards
+    // marks hits as X
+    // check if card has bingo
+    // get 5 numbers that triggered bingo
+    // multiply them by number N
+    const cardWon = new Set([])
+    const solutionWon = []
 
-		const currentMeasurement = iter + data[i + 1] + data[i + 2]
-		const previousMeasurement = data[i - 1] + iter + data[i + 1]
+    data.numbers.forEach((N, i) => {
+        let sumOfUnusedCardNumbers
 
-		if (previousMeasurement) {
-			if (currentMeasurement > previousMeasurement) {
-				return acc + 1
-			}
-		}
+        data.cards.forEach((C, j) => {
+            const matchIndex = C.indexOf(N)
+            if (matchIndex > -1) {
+                C[matchIndex] = "X"
 
-		return acc
-	}, 0)
+                if (cardWon.has(j)) {
+                    // card already won
+                    return
+                }
 
-	return result
+                const stateAfterUpdate = checkCrossHitsOnLocation(C, matchIndex)
+
+                if (stateAfterUpdate !== false) {
+                    cardWon.add(j)
+                    solutionWon.push(N * stateAfterUpdate)
+                }
+            }
+        })
+    })
+    console.log(solutionWon);
+    return solutionWon.pop()
 }
 
-const data = await fetchPastebinDataJSON("https://pastebin.com/raw/YHK1vg8P")
-// console.log("data:",data);
-const a = calculate_a(data)
-// const b = calculate_b(data)
+const rawData = await fetchPastebinDataJSON("https://pastebin.com/raw/YHK1vg8P")
+const data = {...rawData, numbers: rawData.numbers.map(n => parseInt(n))}
 
-console.log('solutions: ', { a, b:0 })
+const a = calculate_a(data)
+const b = calculate_b(data)
+
+console.log('solutions: ', { a, b })
