@@ -11,17 +11,23 @@ function checkCrossHitsOnLocation(card, i) {
 
     const changedRowIndexes = [firstRowNum, firstRowNum + 1, firstRowNum + 2, firstRowNum + 3, firstRowNum + 4]
 
-    if (changedRowIndexes.map(i => card[i]).join("") === BINGO) {
-        return changedRowIndexes
-    }
+    const isRowBing = changedRowIndexes.map(i => card[i]).join("") === BINGO
 
     const changedColIndexes = [firstRowNum, firstRowNum + 5, firstRowNum + 10, firstRowNum + 15, firstRowNum + 20]
 
-    if (changedColIndexes.map(i => card[i]).join("") === BINGO) {
-        return changedColIndexes
+    const isColBing = changedColIndexes.map(i => card[i]).join("") === BINGO
+
+    if (!isRowBing && !isColBing) {
+        return false
     }
 
-    return false
+    // return sum of all remaining numbers
+    return card.reduce((acc, iter) => {
+        if (iter === "X") {
+            return acc
+        }
+        return acc + iter
+    }, 0)
 }
 
 export function calculate_a(data) {
@@ -35,29 +41,30 @@ export function calculate_a(data) {
 
     data.numbers.every((N, i) => {
         // something
-        let bingoPentaSum
+        let sumOfUnusedCardNumbers
 
         data.cards.every((C, j) => {
             const matchIndex = C.indexOf(N)
             if (matchIndex > -1) {
                 C[matchIndex] = "X"
                 const stateAfterUpdate = checkCrossHitsOnLocation(C, matchIndex)
-                if (Array.isArray(stateAfterUpdate)) {
-                    console.log("BINGO!");
-                    bingoPentaSum = stateAfterUpdate.reduce((acc, iter) => acc + iter, 0)
+                if (stateAfterUpdate !== false) {
+                    sumOfUnusedCardNumbers = stateAfterUpdate
                     return false
                 }
                 return true
             }
         })
 
-        if (bingoPentaSum) {
-            solution = N * bingoPentaSum
+        if (sumOfUnusedCardNumbers) {
+            solution = N * sumOfUnusedCardNumbers
             return false
         }
-
+        // console.log(data.cards);
         return true
     })
+
+    return solution
 }
 
 export function calculate_b(data) {
@@ -83,6 +90,7 @@ export function calculate_b(data) {
 }
 
 const data = await fetchPastebinDataJSON("https://pastebin.com/raw/YHK1vg8P")
+// console.log("data:",data);
 const a = calculate_a(data)
 // const b = calculate_b(data)
 
