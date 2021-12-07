@@ -1,7 +1,7 @@
-// https://adventofcode.com/2021/day/1
+// https://adventofcode.com/2021/day/5
 import { fetchPastebinData } from '../utils/index.js'
 
-const addCoordinateUniversal = (x, y, result) => {
+function addCoordinateUniversal (x, y, result) {
 	const key = `${x}:${y}`
 	result[key] = result[key] ? result[key] + 1 : 1
 }
@@ -52,8 +52,11 @@ export function calculate_b(data) {
 		const xMoveIncrement = x1 < x2 ? 1 : -1
 		const yMoveIncrement = y1 < y2 ? 1 : -1
 
-		for (let x = x1, y = y2; x !== x2; x += xMoveIncrement, y += yMoveIncrement) {
+		for (let x = x1, y = y1; true; x += xMoveIncrement, y += yMoveIncrement) {
 			addCoordinate(x, y)
+            if (x === x2) {
+                break
+            }
 		}
 	}
 
@@ -78,7 +81,7 @@ const data = rawData.split(new RegExp('\r\n|\r|\n', 'g')).map((s) => {
 	return [parseInt(x1), parseInt(y1), parseInt(x2), parseInt(y2)]
 })
 
-// const { solution: a } = calculate_a(data)
-// const { solution: b } = calculate_b(data)
+const { solution: a } = calculate_a(data)
+const { solution: b } = calculate_b(data)
 
-// console.log('solutions: ', { a, b })
+console.log('solutions: ', { a, b })

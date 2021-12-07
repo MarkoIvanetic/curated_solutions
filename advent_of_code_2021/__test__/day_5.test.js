@@ -13,6 +13,13 @@ const inputData = [
 	[5, 5, 8, 2],
 ]
 
+const inputData2 = [
+	[6, 6, 2, 2],
+	[1, 4, 5, 0],
+	[3, 1, 8, 6],
+	[8, 0, 0, 8],
+]
+
 describe('[Day 4 - task 1] proposed solution should', () => {
 	test('handle simple example of random numbers', () => {
 		const { solution } = calculate_a(inputData)
@@ -21,8 +28,12 @@ describe('[Day 4 - task 1] proposed solution should', () => {
 })
 
 describe('[Day 4 - task 2] proposed solution should', () => {
-	test('handle simple example of random numbers', () => {
+	test('handle simple example of preconfigured coordinates', () => {
 		const { solution } = calculate_b(inputData)
 		expect(solution).toBe(12)
+	})
+	test('handle simple example of multi directional coordinates', () => {
+		const { solution } = calculate_b(inputData2)
+		expect(solution).toBe(2)
 	})
 })
