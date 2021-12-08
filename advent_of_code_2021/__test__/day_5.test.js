@@ -20,14 +20,14 @@ const inputData2 = [
 	[8, 0, 0, 8],
 ]
 
-describe('[Day 4 - task 1] proposed solution should', () => {
+describe('[Day 5 - task 1] proposed solution should', () => {
 	test('handle simple example of random numbers', () => {
 		const { solution } = calculate_a(inputData)
 		expect(solution).toBe(5)
 	})
 })
 
-describe('[Day 4 - task 2] proposed solution should', () => {
+describe('[Day 5 - task 2] proposed solution should', () => {
 	test('handle simple example of preconfigured coordinates', () => {
 		const { solution } = calculate_b(inputData)
 		expect(solution).toBe(12)
