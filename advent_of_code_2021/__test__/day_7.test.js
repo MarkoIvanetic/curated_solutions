@@ -9,9 +9,9 @@ describe('[Day 7 - task 1] proposed solution should', () => {
 	})
 })
 
-// describe('[Day 7 - task 2] proposed solution should', () => {
-// 	test('handle simple example of random numbers', () => {
-// 		const solution = calculate_b(inputData)
-// 		expect(solution).toBe(1754597645339)
-// 	})
-// })
+describe('[Day 7 - task 2] proposed solution should', () => {
+	test('handle simple example of random numbers', () => {
+		const solution = calculate_b(inputData)
+		expect(solution).toBe(168)
+	})
+})
